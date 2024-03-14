@@ -5,8 +5,13 @@ import { Movie } from "../models/movie.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const favorites = await Favorite.find().lean();
-  res.json(favorites);
+  try {
+    const favorites = await Favorite.find().populate("movie").lean();
+    res.json(favorites);
+  } catch (error) {
+    console.error("Error fetching favorites:", error);
+    res.status(500).json({ error: "Failed to fetch favorites" });
+  }
 });
 
 router.post("/:id", async (req, res) => {
