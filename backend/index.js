@@ -24,3 +24,5 @@ app.use("/favorites", favoritesRouter);
 app.listen(PORT, () => {
   console.log(`Listening on ${process.env.BACKEND_URL}`);
 });
+
+console.log("Hallo Welt");
